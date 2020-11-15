@@ -47,6 +47,7 @@ function sendEmbed(channel, type, dynamic) {
 		: 'image';
 
 	const embed = new Discord.MessageEmbed()
+		.setColor(Math.floor(Math.random() * 16777215).toString(16))
 		.setDescription(`${config.emoji} Random ${imageType} arrived! ${config.emoji}`)
 		.setImage(image)
 		.setFooter(`${user.username} | ${user.id}`);
