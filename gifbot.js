@@ -26,12 +26,17 @@ bot.on('ready', () => {
 });
 
 function findAvatar(type, dynamic) {
-	const foundUser = bot.users.cache.random();
-	const foundImage = foundUser.avatarURL({ dynamic: dynamic });
+	try {
+		const foundUser = bot.users.cache.random();
+		const foundImage = foundUser.avatarURL({ dynamic: dynamic });
 
-	if (foundImage.substr(-type.length) !== type) return findAvatar(type, dynamic);
+		if (foundUser.bot) throw null;
+		else if (!foundImage || foundImage.substr(-type.length) !== type) throw null;
 
-	else return { user: foundUser, image: foundImage };
+		else return { user: foundUser, image: foundImage };
+	}
+
+	catch { return findAvatar(type, dynamic); }
 }
 
 function sendEmbed(channel, type, dynamic) {
