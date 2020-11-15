@@ -37,8 +37,12 @@ function findAvatar(type, dynamic) {
 function sendEmbed(channel, type, dynamic) {
 	const { user, image } = findAvatar(type, dynamic);
 
+	const imageType = (type === '.gif')
+		? 'gif'
+		: 'image';
+
 	const embed = new Discord.MessageEmbed()
-		.setDescription(`${config.emoji} Random image arrived! ${config.emoji}`)
+		.setDescription(`${config.emoji} Random ${imageType} arrived! ${config.emoji}`)
 		.setImage(image)
 		.setFooter(`${user.username} | ${user.id}`);
 
